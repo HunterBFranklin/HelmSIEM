@@ -62,10 +62,23 @@ def log_event(message, level="INFO"):
 
 def format_timestamp(raw_timestamp):
     """
-    Cleans up Elasticsearch timestamp format for display.
-    Converts 2026-05-07T02:11:14.513+0000 to 2026-05-07 02:11:14
+    Cleans up Elasticsearch timestamp format and converts to local time.
+    Converts 2026-05-07T08:50:18.000+0000 to local time display.
     """
     try:
-        return raw_timestamp[:19].replace("T", " ")
+        from datetime import timezone, timedelta
+        
+        # Parse the raw UTC timestamp.
+        clean = raw_timestamp[:19].replace("T", " ")
+        dt = datetime.strptime(clean, "%Y-%m-%d %H:%M:%S")
+        
+        # Assign UTC timezone.
+        dt = dt.replace(tzinfo=timezone.utc)
+        
+        # Convert to local time automatically.
+        local_dt = dt.astimezone()
+        
+        return local_dt.strftime("%Y-%m-%d %H:%M:%S %Z")
+        
     except Exception:
         return raw_timestamp
