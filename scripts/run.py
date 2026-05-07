@@ -1,10 +1,12 @@
 # ================================================================
 # Project:     Self-Hosted SIEM System - Run (Main)
-# Description: Queries Elasticsearch for high severity Wazuh
-#              alerts and outputs a formatted security report
+# Description: It imports all three runners and calls their 
+#              main() functions in sequence with a formatted 
+#              header and footer around the output. 
+#
 # Author:      Hunter B. Franklin
 # Created:     May 06, 2026
-# Modified:    May 06, 2026
+# Modified:    May 07, 2026
 # Version:     1.5
 # GitHub:      github.com/HunterBFranklin/selfhosted-siem-system
 # ================================================================

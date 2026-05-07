@@ -2,7 +2,7 @@
 # Project:     Self-Hosted SIEM System - Report Format
 # Author:      Hunter B. Franklin
 # Created:     May 06, 2026
-# Modified:    May 06, 2026
+# Modified:    May 07, 2026
 # Version:     1.5
 # GitHub:      github.com/HunterBFranklin/selfhosted-siem-system
 # ================================================================
@@ -27,7 +27,7 @@ def format_alerts(results, severity_label=None, severity_min=None, severity_max=
     if not hits:
         return None
     
-    # Build severity range string for header
+    # Build severity range string for header.
     if severity_min and severity_max:
         severity_str = f"Level {severity_min}-{severity_max}"
     elif severity_min:

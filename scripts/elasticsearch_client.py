@@ -2,7 +2,7 @@
 # Project:     Self-Hosted SIEM System - Elasticsearch Client
 # Author:      Hunter B. Franklin
 # Created:     May 06, 2026
-# Modified:    May 06, 2026
+# Modified:    May 07, 2026
 # Version:     1.5
 # GitHub:      github.com/HunterBFranklin/selfhosted-siem-system
 # ================================================================
@@ -31,7 +31,7 @@ def get_recent_alerts(severity_override=None, severity_max=None):
     
     threshold = severity_override if severity_override is not None else 1
 
-    # Build level range filter
+    # Build level range filter.
     level_filter = {"gte": threshold}
     if severity_max is not None:
         level_filter["lte"] = severity_max

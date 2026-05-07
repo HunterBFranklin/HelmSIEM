@@ -2,7 +2,7 @@
 # Project:     Self-Hosted SIEM System - Critical Alerts (12+)
 # Author:      Hunter B. Franklin
 # Created:     May 06, 2026
-# Modified:    May 06, 2026
+# Modified:    May 07, 2026
 # Version:     1.5
 # GitHub:      github.com/HunterBFranklin/selfhosted-siem-system
 # ================================================================
@@ -34,7 +34,7 @@ def main():
             print("📭 No critical alerts to report")
 
     except requests.exceptions.ConnectionError:
-        print("❌ ERROR: Cannot connect to Elasticsearch")
+        print("❌  ERROR: Cannot connect to Elasticsearch")
         print(f"   Make sure Docker and Wazuh are running\n")
 
     except Exception as e:
