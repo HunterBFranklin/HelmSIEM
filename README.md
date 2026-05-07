@@ -15,25 +15,52 @@ This is an ongoing project — I'm adding to it as I learn.
 
 ## Screenshots:
 
-### Wazuh Dashboard:
-<img src="screenshots/wazuh-dashboard.png" 
-     style="border: 2px solid #888; border-radius: 4px;">
+## Screenshots
 
-### Ubuntu VM (XFCE Desktop):
-<img src="screenshots/vm-desktop.png" 
-     style="border: 2px solid #888; border-radius: 4px;">
-
-### Monitored Endpoint — Neofetch:
-<img src="screenshots/neofetch.png" 
-     style="border: 2px solid #888; border-radius: 4px;">
-
-### Python Alert Script — Terminal Output:
-<img src="screenshots/terminal-report.png" 
-     style="border: 2px solid #888; border-radius: 4px;">
-
-### Automated Email Report:
-<img src="screenshots/email-report.png" 
-     style="border: 2px solid #888; border-radius: 4px;">
+<table>
+  <tr>
+    <td align="center" style="background-color:#1a3a2a; padding:8px;">
+      <img src="https://img.shields.io/badge/Wazuh-Dashboard-2ea44f?style=for-the-badge"/>
+    </td>
+    <td align="center" style="background-color:#1a3a2a; padding:8px;">
+      <img src="https://img.shields.io/badge/VM-Desktop-2ea44f?style=for-the-badge"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/wazuh-dashboard.png" width="480"/>
+    </td>
+    <td align="center">
+      <img src="screenshots/vm-desktop.png" width="480"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="background-color:#1a3a2a; padding:8px;">
+      <img src="https://img.shields.io/badge/Neofetch-Endpoint-2ea44f?style=for-the-badge"/>
+    </td>
+    <td align="center" style="background-color:#1a3a2a; padding:8px;">
+      <img src="https://img.shields.io/badge/Terminal-Report-2ea44f?style=for-the-badge"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/neofetch.png" width="480"/>
+    </td>
+    <td align="center">
+      <img src="screenshots/terminal-report.png" width="480"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="background-color:#1a3a2a; padding:8px;">
+      <img src="https://img.shields.io/badge/Email-Report-2ea44f?style=for-the-badge"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="screenshots/email-report.png" width="480"/>
+    </td>
+  </tr>
+</table>
 
 ---
 
