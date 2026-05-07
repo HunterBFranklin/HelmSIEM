@@ -3,7 +3,7 @@
 <br>
 <img src="https://img.shields.io/badge/Hunter_Franklin-Started_May_2026-238636?style=for-the-badge&labelColor=1a3a2a" width="380"/>
 <br>
-<img src="https://img.shields.io/badge/Current_Version_:_1.5-238636?style=for-the-badge&labelColor=1a3a2a" width="180"/>
+<img src="https://img.shields.io/badge/Current_Version_:_2.0-238636?style=for-the-badge&labelColor=1a3a2a" width="180"/>
 </div>
 <br>
 
@@ -141,8 +141,6 @@ selfhosted-siem-system/
 │   ├── formatter.py             # HTML report formatting and template building
 │   ├── email_reporter.py        # HTML email construction and delivery
 │   ├── utils.py                 # shared helper functions and terminal output
-│   ├── scheduler.py             # automated scheduling via cron (coming v3.0)
-│   ├── sms_reporter.py          # SMS alerting via Twilio (coming v3.0)
 │   ├── .env                     # local credentials — never committed
 │   └── .env.example             # credential template — safe to commit
 ├── templates/
