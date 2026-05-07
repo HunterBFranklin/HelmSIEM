@@ -16,27 +16,22 @@ This is an ongoing project — I'm adding to it as I learn.
 ## Screenshots:
 
 ### Wazuh Dashboard:
-![Wazuh Dashboard](screenshots/wazuh-dashboard.png)
 <img src="screenshots/wazuh-dashboard.png" 
      style="border: 2px solid #888; border-radius: 4px;">
 
 ### Ubuntu VM (XFCE Desktop):
-![VM Desktop](screenshots/vm-desktop.png)
 <img src="screenshots/vm-desktop.png" 
      style="border: 2px solid #888; border-radius: 4px;">
 
 ### Monitored Endpoint — Neofetch:
-![Neofetch](screenshots/neofetch.png)
 <img src="screenshots/neofetch.png" 
      style="border: 2px solid #888; border-radius: 4px;">
 
 ### Python Alert Script — Terminal Output:
-![Terminal Report](screenshots/terminal-report.png)
 <img src="screenshots/terminal-report.png" 
      style="border: 2px solid #888; border-radius: 4px;">
 
 ### Automated Email Report:
-![Email Report](screenshots/email-report.png)
 <img src="screenshots/email-report.png" 
      style="border: 2px solid #888; border-radius: 4px;">
 
