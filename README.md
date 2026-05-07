@@ -3,7 +3,7 @@
 <br>
 <img src="https://img.shields.io/badge/Hunter_Franklin-Started_May_2026-238636?style=for-the-badge&labelColor=1a3a2a" width="380"/>
 </div>
-<br><br>
+<br>
 
 A self-hosted Security Information and Event Management (SIEM) system built from the ground up using Docker, Wazuh, and the ELK Stack. 
 This project simulates a real-world security operations environment — monitoring live endpoints, detecting threats, mapping them to the 
