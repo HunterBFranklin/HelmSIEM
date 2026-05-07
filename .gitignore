@@ -1,0 +1,14 @@
+# Environment variables - never commit these
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Mac system files
+.DS_Store
+
+# Wazuh agent installer
+wazuh-agent.pkg
