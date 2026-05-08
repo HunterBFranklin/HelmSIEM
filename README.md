@@ -150,7 +150,7 @@ selfhosted-siem-system/
 │   ├── elasticsearch_client.py  # Elasticsearch API queries
 │   ├── formatter.py             # HTML report formatting and template building
 │   ├── email_reporter.py        # HTML email construction and delivery
-│   ├── utility.py                 # shared helper functions and terminal output
+│   ├── utility.py               # shared helper functions and terminal output
 │   ├── daily_recap.py           # main daily recap orchestrator (v3.0) 
 │   ├── recap_formatter.py       # builds the daily recap HTML email (v3.0)
 │   ├── scheduler.py             # toggle on/off, handles 8 PM PST scheduling (v3.0)
@@ -223,7 +223,25 @@ Next:
 ```
 ## Versions
 
-**v2.0 — May 2026 (current)**
+**v3.0 — In Development**
+- Daily recap email — 24-hour lookback summary sent at 8PM PST
+- Dedicated recap orchestrator (daily_recap.py), separate from live alert runners
+- Dedicated recap HTML formatter (recap_formatter.py) with expanded sections
+- Top 10 most important alerts with full detail — rule level, MITRE technique, tactic, compliance frameworks
+- Complete MITRE ATT&CK summary — total techniques detected with full breakdown and bar chart
+- Fail2Ban activity section — total bans, banned IPs, affected agents, timestamps
+- Network activity section — port changes, new connections, listened ports
+- Active agents summary — all reporting agents with 24-hour alert counts
+- Remaining alert activity — everything outside the top 10 summarized by rule and count
+- Scheduler (scheduler.py) with a simple ENABLED toggle for on/off control
+- 8PM PST automated scheduling via the schedule library
+- Scheduler logging to logs/scheduler.log
+- HTML email template extracted to templates/email_template.html
+- Cron job for automated scheduled reporting
+- Suricata for network traffic analysis
+- Custom Wazuh detection rules
+
+**v2.0 — May 2026**
 - Modular Python architecture — config, elasticsearch_client, 
   formatter, email_reporter, utility
 - Three severity tier runners — critical (12-15), high (7-11), all (1+)
