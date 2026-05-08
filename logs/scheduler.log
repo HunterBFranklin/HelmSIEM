@@ -1,0 +1,4 @@
+[2026-05-07 19:27:22] [INFO] Scheduler started — daily recap scheduled at 20:00 PST
+[2026-05-07 19:27:22] [INFO] Log file: /Users/hunterfranklin/Documents/selfhosted-siem-system/logs/scheduler.log
+[2026-05-07 19:27:22] [INFO] Press Control + C to stop
+[2026-05-07 19:29:17] [INFO] Scheduler stopped by user
