@@ -18,3 +18,4 @@
 [2026-05-07 20:36:44] [INFO] Daily recap sent — 515 alerts over 24 hours
 [2026-05-07 20:57:04] [INFO] Daily recap sent — 513 alerts over 24 hours
 [2026-05-07 21:03:19] [INFO] Daily recap sent — 542 alerts over 24 hours
+[2026-05-08 13:25:47] [ERROR] Daily recap failed — cannot connect to Elasticsearch
