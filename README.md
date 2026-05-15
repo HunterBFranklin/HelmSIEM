@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://img.shields.io/badge/🛡️_Self--Hosted-Personal_SIEM_System-2ea44f?style=for-the-badge&logoColor=white&labelColor=1a3a2a" width="600"/>
+<img src="https://img.shields.io/badge/🛡️_Helm_SIEM_-2ea44f?style=for-the-badge&logoColor=white&labelColor=1a3a2a" width="300"/>
 <br>
 <img src="https://img.shields.io/badge/Current_Version_:_2.0-238636?style=for-the-badge&labelColor=1a3a2a" width="180"/>
 </div>
