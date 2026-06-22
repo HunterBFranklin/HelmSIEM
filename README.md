@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://img.shields.io/badge/🛡️_Self--Hosted-Personal_SIEM_System-2ea44f?style=for-the-badge&logoColor=white&labelColor=1a3a2a" width="600"/>
+<img src="https://img.shields.io/badge/🛡️_Helm_SIEM_-2ea44f?style=for-the-badge&logoColor=white&labelColor=1a3a2a" width="300"/>
 <br>
 <img src="https://img.shields.io/badge/Current_Version_:_2.0-238636?style=for-the-badge&labelColor=1a3a2a" width="180"/>
 </div>
@@ -199,28 +199,6 @@ Next:
 - Windows endpoint when I get a PC later this year
 - Eventually tie this into a full homelab with a home server and VPN
 
-## Roadmap
-```
-- [x] Wazuh + ELK stack deployed via Docker
-- [x] Ubuntu VM monitored endpoint
-- [x] MacBook Pro agent connected
-- [x] Python alert notifier querying the Elasticsearch API
-- [x] Modular Python architecture
-- [x] Three severity tier runners
-- [x] HTML email with severity charts and MITRE breakdown
-- [x] Fail2Ban integration
-- [x] Real CVE detected and remediated (CVE-2026-26066)
-- [x] Credentials secured with python-dotenv
-- [x] Published to GitHub
-- [ ] Cron job scheduling
-- [ ] SMS alerting via Twilio
-- [ ] Custom Wazuh detection rules
-- [ ] Suricata network traffic analysis
-- [ ] JavaScript custom dashboard
-- [ ] Windows endpoint agent
-- [ ] Home server integration
-- [ ] VPN monitoring
-```
 ## Versions
 
 **v3.0 — In Development**
