@@ -1,10 +1,9 @@
 # =============================================================================
 # HelmSIEM — scheduler.py
-# Maintainer : Hunter B. Franklin
-# GitHub     : github.com/HunterBFranklin/helm-siem
+# Maintainer : github.com/HunterBFranklin/HelmSIEM
 # License    : MIT
 # Created    : May 06, 2026
-# Modified   : May 12, 2026
+# Modified   : June 21, 2026
 # Version    : 3.0
 # =============================================================================
 
@@ -20,13 +19,17 @@
 
 # region --- Imports (expand for description) ---
 # Description:
-# schedule + time drive the once-a-day execution loop.
-# subprocess runs daily_recap.py as a child process so its output
-# is captured and logged cleanly without mixing into this process's
-# stdout. pathlib resolves the script path relative to this file so
-# the subprocess call works regardless of which directory you launch
-# Python from. All timing config comes from config so you change the
-# scheduled time in .env, not in this file.
+# schedule is a lightweight Python library that handles recurring job
+# scheduling with a simple, readable API.
+#
+# subprocess runs daily_recap.py as a child process rather than calling
+# it as a function. This isolation means if the recap crashes or hangs,
+# the scheduler process stays alive and will try again tomorrow.
+# It also keeps the recap's stdout captured and logged cleanly.
+#
+# pathlib resolves the script path relative to this file so the
+# subprocess call works regardless of which directory Python was
+# launched from, a common source of "file not found" errors.
 # endregion
 
 import schedule
@@ -43,10 +46,14 @@ from config import (
 
 # region --- _log (expand for description) ---
 # Description:
-# Local logger for the scheduler process. We keep this separate from
-# utility.log_event because scheduler.py writes to scheduler.log while
-# the rest of HelmSIEM writes to alert.log — mixing them would make
-# both files harder to read. Same format though: [timestamp] [level] message.
+# The scheduler has its own logging function writing to scheduler.log,
+# separate from alert.log which the rest of HelmSIEM uses. They're
+# kept separate because mixing scheduler lifecycle messages (started,
+# stopped, recap triggered) with alert events would make both files
+# harder to read and grep through.
+#
+# Same format as log_event() in utility.py:
+#       [YYYY-MM-DD HH:MM:SS] [LEVEL] message
 # endregion
 
 def _log(message: str, level: str = "INFO") -> None:
@@ -62,19 +69,13 @@ def _log(message: str, level: str = "INFO") -> None:
 
 # region --- run_daily_recap (expand for description) ---
 # Description:
-# Executes daily_recap.py as a subprocess and logs the result.
-# Running it as a subprocess rather than a direct function call keeps
-# the scheduler process clean, meaning if daily_recap.py crashes for any
-# reason it doesn't take down the scheduler with it.
-# Each line of stdout from the child process is echoed to the log
-# with a two-space indent so you can tell recap output apart from
-# scheduler output at a glance.
+# Fires daily_recap.py as a subprocess and logs the result.
 # endregion
 
 def run_daily_recap() -> None:
-    """Launch daily_recap.py and log its output and exit status."""
+    """Launch daily_recap.py as a subprocess and log its output and exit status."""
     if not DAILY_RECAP_ENABLED:
-        _log("Daily recap is disabled — skipping", level="WARNING")
+        _log("Daily recap is disabled (DAILY_RECAP_ENABLED=false), skipping", level="WARNING")
         return
 
     _log("Starting daily recap...")
@@ -101,23 +102,33 @@ def run_daily_recap() -> None:
 
 # region --- main (expand for description) ---
 # Description:
-# The scheduler loop. Registers a once-daily job at RECAP_SCHEDULED_TIME
-# (pulled from config, default 20:00), then polls every 60 seconds
-# to check whether the job should fire. Runs until you hit Control+C.
-# If DAILY_RECAP_ENABLED is False in .env, we log the fact and exit
-# immediately rather than spinning indefinitely doing nothing.
+# Registers the daily recap job and enters a polling loop.
+# schedule.every().day.at() sets the time using 24-hour format —
+# "20:00" means 8 PM. The time comes from config, which reads it
+# from RECAP_HOUR and RECAP_MINUTE in .env.
+#
+# The while True / time.sleep(60) loop checks every 60 seconds
+# whether any scheduled jobs are due. This is the standard pattern
+# for the schedule library, it does no work unless a job is due,
+# so CPU usage is negligible.
+#
+# KeyboardInterrupt (Control+C) is caught cleanly so the log
+# shows "stopped by user" rather than a Python traceback.
+#
+# If DAILY_RECAP_ENABLED is false, we log and exit immediately
+# rather than running an infinite loop that would never do anything.
 # endregion
 
 def main() -> None:
     if not DAILY_RECAP_ENABLED:
         _log(
-            "Daily recap is DISABLED — set DAILY_RECAP_ENABLED=true in .env to enable",
+            "Daily recap is DISABLED, set DAILY_RECAP_ENABLED=true in .env to enable",
             level="WARNING",
         )
         _log("Scheduler exiting")
         return
 
-    _log(f"{SIEM_NAME} scheduler started — daily recap at {RECAP_SCHEDULED_TIME}")
+    _log(f"{SIEM_NAME} scheduler started, daily recap scheduled at {RECAP_SCHEDULED_TIME}")
     _log(f"Log file: {SCHEDULER_LOG_PATH}")
     _log("Press Control + C to stop")
 
@@ -126,15 +137,13 @@ def main() -> None:
     try:
         while True:
             schedule.run_pending()
-            time.sleep(60)  # check every minute.
+            time.sleep(60)  # poll every 60 seconds
     except KeyboardInterrupt:
         _log("Scheduler stopped by user")
 
-# region --- Entry Point (expand for description) ---
-# Description:
+# region --- Entry Point ---
 # Run with: python3 scheduler.py
-# Leave it running in a terminal or a tmux/screen session and it will
-# fire the daily recap automatically every evening.
+# Keep it running in a terminal, tmux session, or background process.
 # endregion
 
 if __name__ == "__main__":

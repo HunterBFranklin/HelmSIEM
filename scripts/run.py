@@ -1,24 +1,11 @@
-# ================================================================
-# Project:     HelmSIEM — Self-Hosted Security Monitoring
-# File:        run.py
-#
-# Description: The main entry point for HelmSIEM's alert reporting
-#              suite. Running this file triggers all three severity
-#              tier reports in sequence — critical, high, and full.
-#              Each report queries your Elasticsearch instance,
-#              formats the results, and sends an email. Run this
-#              manually anytime or point a cron job at it for
-#              automated reporting.
-#
-#              Usage: python3 run.py
-#
-# Maintainer:  Hunter B. Franklin
-# GitHub:      github.com/HunterBFranklin/helm-siem
-# License:     MIT
-# Created:     May 06, 2026
-# Modified:    May 10, 2026
-# Version:     3.0
-# ================================================================
+# =============================================================================
+# HelmSIEM — run.py
+# Maintainer : github.com/HunterBFranklin/HelmSIEM
+# License    : MIT
+# Created    : May 06, 2026
+# Modified   : June 21, 2026
+# Version    : 3.0
+# =============================================================================
 
 # ----------------------------------------------------------------
 # VS Code Folding Key Reference
@@ -30,32 +17,46 @@
 # Fold all comments       →  Command + K, Command + 8
 # ----------------------------------------------------------------
 
+# region --- Overview (expand for description) ---
+# Description:
+# run.py is the master entry point for HelmSIEM's live alert suite.
+# Running this file executes all three severity tier reports in
+# sequence, Critical (12-15), High (7-11), and All (1+).
+#
+# Usage:
+#       python3 run.py
+#
+# To run a single tier instead:
+#       python3 critical_alerts.py
+#       python3 high_alerts.py
+#       python3 all_alerts.py
+#
+# For the daily 24-hour recap, see scheduler.py and daily_recap.py.
+# endregion
+
 # region --- Imports (expand for description) ---
 # Description:
-# The three severity tier runners — each one is its own file
-# that handles a specific range of Wazuh rule levels. We import
-# them here so we can call their main() functions one after
-# another. datetime stamps the header with the current time so
-# every run is clearly logged in your terminal output.
+# Each tier runner is its own module with its own main() function.
 # endregion
 
-import critical_alerts  # handles rule levels 12-15.
-import high_alerts      # handles rule levels 7-11.
-import all_alerts       # handles rule levels 1+.
+import critical_alerts  # Wazuh rule levels 12-15
+import high_alerts      # Wazuh rule levels 7-11
+import all_alerts       # Wazuh rule levels 1+
 from datetime import datetime
+from config import SIEM_NAME
 
-# region --- Main Runner (expand for description) ---
+# region --- main (expand for description) ---
 # Description:
-# This is the orchestrator function. It calls each severity tier
-# report in order and wraps the whole run in a formatted header
-# and footer so the terminal output is easy to read at a glance.
-# If you only want to run one tier at a time you can call that
-# file directly — e.g. python3 critical_alerts.py
+# Calls each tier runner in order from highest to lowest severity.
+# Critical runs first so that if something urgent happened, it's
+# in your inbox before the lower-tier emails arrive. Each runner
+# is wrapped in the same try/except pattern internally, if one
+# fails, the others still run.
 # endregion
 
-def main():
+def main() -> None:
     print("\n" + "=" * 60)
-    print("   🛡️  HelmSIEM — Full Report Suite")
+    print(f"   🛡️  {SIEM_NAME}, Full Report Suite")
     print(f"   {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
@@ -72,12 +73,8 @@ def main():
     print("   ✅ All reports complete")
     print("=" * 60 + "\n")
 
-# region --- Entry Point (expand for description) ---
-# Description:
-# Standard Python entry point check. This makes sure main() only
-# runs when you execute this file directly — not when another
-# file imports it. Every executable Python script in HelmSIEM
-# ends with this pattern.
+# region --- Entry Point ---
+# See critical_alerts.py for a full explanation of this pattern.
 # endregion
 
 if __name__ == "__main__":
